@@ -1,0 +1,9 @@
+source $HOME/.screenrc
+
+screen -t vim 0 $EDITOR -c GG
+screen -t srv 1
+stuff "rails server\012"
+screen -t db 2
+stuff "psql chessmonger\012"
+screen -t zsh 3
+select vim
