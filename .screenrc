@@ -1,9 +1,9 @@
 source $HOME/.screenrc
 
-screen -t vim 0 $EDITOR -c GG
-screen -t srv 1
-stuff "rails server\012"
-screen -t db 2
+screen -t db 0
 stuff "psql chessmonger\012"
-screen -t zsh 3
+screen -t srv 2
+stuff "rails server\012"
+screen -t vim 3 $EDITOR -c GG
+screen -t zsh 4
 select vim
