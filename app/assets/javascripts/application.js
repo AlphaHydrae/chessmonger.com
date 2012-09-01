@@ -14,5 +14,13 @@
 //
 //= require jquery
 //= require jquery-ui
+//= require twitter/bootstrap
+//= require underscore
+//= require backbone
+//= require backbone.marionette
 //= require clah
+//= require hamlcoffee
+//= require_tree ../templates
+//= require i18n
+//= require i18n/translations
 //= require_tree .

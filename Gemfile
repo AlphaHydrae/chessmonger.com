@@ -26,9 +26,16 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
   gem 'clah-rails'
+  gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
+  gem 'backbone-on-rails'
+  gem 'marionette-rails'
+  gem 'haml_coffee_assets'
+  gem 'execjs'
+  gem 'i18n-js'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

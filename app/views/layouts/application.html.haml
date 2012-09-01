@@ -1,9 +1,14 @@
 !!!
 %html
   %head
-    %title Chessmonger
+    %title= t('common.title')
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application" 
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          %a.brand{ :href => root_path }= t('common.title')
+    .container
+      = yield
