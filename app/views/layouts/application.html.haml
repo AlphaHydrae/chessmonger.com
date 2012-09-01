@@ -10,5 +10,8 @@
       .navbar-inner
         .container
           %a.brand{ :href => root_path }= t('common.title')
+          - if user_signed_in?
+            %ul.nav.pull-right
+              %li= link_to t('common.logout'), destroy_user_session_path, :method => :delete
     .container
       = yield
