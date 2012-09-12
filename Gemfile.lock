@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/AlphaHydrae/chessmonger.git
+  revision: f938fd137b20716b1f4c32582317d1fd852001fc
+  branch: develop
+  specs:
+    chessmonger (0.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,6 +160,7 @@ DEPENDENCIES
   anjlab-bootstrap-rails (>= 2.1)
   backbone-on-rails
   cancan
+  chessmonger!
   clah-rails
   coffee-rails (~> 3.2.1)
   devise

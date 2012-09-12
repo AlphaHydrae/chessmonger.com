@@ -18,6 +18,7 @@
 //= require underscore
 //= require backbone
 //= require backbone.marionette
+//= require_tree ./lib
 //= require clah
 //= require hamlcoffee
 //= require_tree ../templates
