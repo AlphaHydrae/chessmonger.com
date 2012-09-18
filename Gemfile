@@ -7,6 +7,7 @@ gem 'rails', '3.2.8'
 
 gem 'chessmonger', :git => 'git://github.com/AlphaHydrae/chessmonger.git', :branch => 'develop'
 
+# Templating
 gem 'haml'
 
 # Authentication
