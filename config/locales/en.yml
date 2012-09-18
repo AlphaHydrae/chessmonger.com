@@ -5,3 +5,20 @@ en:
   common:
     title: "Chessmonger"
     logout: "Logout"
+  devise:
+    sessions:
+      new:
+        title: "Please log in"
+        remember_me: "Remember me"
+        submit: "Log in"
+    registrations:
+      new:
+        title: "Create your account"
+        submit: "Register"
+    shared:
+      links:
+        login: "Log in"
+        register: "Register"
+        forgot_password: "Forgot your password?"
+        did_not_receive_confirmation: "Didn't receive confirmation instructions?"
+        did_not_receive_unlock: "Didn't receive unlock instructions?"

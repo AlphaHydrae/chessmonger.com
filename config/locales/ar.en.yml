@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Re-type your password"

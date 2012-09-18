@@ -27,7 +27,11 @@ group :test, :development do
   gem 'test-unit' # prevents an error when generating tests
   gem 'rspec-rails'
   gem 'shoulda'
+end
+
+group :test do
   gem 'capybara'
+  #gem 'database_cleaner'
 end
 
 group :development, :production do
