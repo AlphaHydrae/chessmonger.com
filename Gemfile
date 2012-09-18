@@ -22,12 +22,15 @@ group :development do
   gem 'thin'
 end
 
-group :development, :production do
-  gem 'pg'
+group :test, :development do
+  gem 'sqlite3'
+  gem 'test-unit' # prevents an error when generating tests
+  gem 'rspec-rails'
+  gem 'shoulda'
 end
 
-group :test do
-  gem 'sqlite3'
+group :development, :production do
+  gem 'pg'
 end
 
 # Gems used only for assets and not required
