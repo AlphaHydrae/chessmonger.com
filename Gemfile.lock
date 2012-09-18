@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/AlphaHydrae/chessmonger.git
-  revision: f938fd137b20716b1f4c32582317d1fd852001fc
+  revision: 472778aa960f484ad0d124ae5b16cb84711ba91f
   branch: develop
   specs:
-    chessmonger (0.0.2)
+    chessmonger (0.0.3)
 
 GEM
   remote: https://rubygems.org/
