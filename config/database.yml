@@ -4,7 +4,6 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  host: localhost
   adapter: postgresql
   database: chessmonger
 
@@ -16,6 +15,8 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
+#  adapter: postgresql
+#  database: chessmonger-test
 
 production:
   adapter: sqlite3
