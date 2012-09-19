@@ -41,8 +41,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  
-
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
@@ -55,27 +53,34 @@ RSpec.configure do |config|
   config.order = "random"
 
   # Test server for capybara tests
-  config.add_setting :test_server_wait
-  config.add_setting :test_server_port
-  config.test_server_wait = 3
-  config.test_server_port = 3001
-  config.include TestServerHelper
+  # Skip it for fast specs
+  unless config.try(:exclusion_filter).try(:[], :type) == 'request'
 
-  config.before :suite do
-    puts
-    port = config.test_server_port
-    wait = config.test_server_wait
-    puts Paint["Starting test server...", :magenta]
-    raise 'Could not start test server' unless system "bundle exec thin start -e test -p #{port} -d"
-    puts Paint["Waiting #{wait} seconds for test server to start...", :magenta]
-    sleep wait
-    puts Paint["Successfully started test server on port #{port}.", :cyan, :bold]
-  end
+    # Test server settings
+    config.add_setting :test_server_wait
+    config.add_setting :test_server_port
+    config.test_server_wait = 3
+    config.test_server_port = 3001
+    config.include TestServerHelper
 
-  config.after :suite do
-    puts
-    puts Paint["Stopping test server...", :magenta]
-    raise 'Could not stop test server' unless system "bundle exec thin stop -e test"
-    puts Paint["Successfully stopped test server.", :cyan, :bold]
+    # Start test server before all tests
+    config.before :suite do
+      puts
+      port = config.test_server_port
+      wait = config.test_server_wait
+      puts Paint["Starting test server...", :magenta]
+      raise 'Could not start test server' unless system "bundle exec thin start -e test -p #{port} -d"
+      puts Paint["Waiting #{wait} seconds for test server to start...", :magenta]
+      sleep wait
+      puts Paint["Successfully started test server on port #{port}.", :cyan, :bold]
+    end
+
+    # Stop test server after all tests
+    config.after :suite do
+      puts
+      puts Paint["Stopping test server...", :magenta]
+      raise 'Could not stop test server' unless system "bundle exec thin stop -e test"
+      puts Paint["Successfully stopped test server.", :cyan, :bold]
+    end
   end
 end
