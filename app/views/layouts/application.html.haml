@@ -10,8 +10,11 @@
       .navbar-inner
         .container
           %a.brand{ :href => root_path }= t('common.title')
-          - if user_signed_in?
-            %ul.nav.pull-right
-              %li= link_to t('common.logout'), destroy_user_session_path, :method => :delete, :id => :logout
+          %ul.nav.pull-right
+            - if user_signed_in?
+              %li= link_to t('common.logout'), destroy_user_session_path, :method => :delete, :class => :logout
+            - else
+              %li= link_to t('common.login'), new_user_session_path, :class => :login
+              %li= link_to t('common.register'), new_registration_path(User), :class => :register
     .container
       = yield

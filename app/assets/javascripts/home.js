@@ -37,7 +37,7 @@ function drawBoard(width, height, pieces) {
 
 $(function() {
 
-  $.ajax({
+  /*$.ajax({
     url: '/board',
     dataType: 'json'
   }).fail(function(xhr) {
@@ -45,5 +45,5 @@ $(function() {
   }).done(function(response) {
     console.log(response);
     drawBoard(response.width, response.height, response.board);
-  });
+  });*/
 });

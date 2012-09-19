@@ -1,6 +1,5 @@
 
 class HomeController < ApplicationController
-  before_filter :authenticate_user!
 
   def board
     p1 = Chessmonger::Player.new 'John Doe'

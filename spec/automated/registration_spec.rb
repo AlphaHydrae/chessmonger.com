@@ -11,32 +11,20 @@ describe 'Registration', :type => :request do
   it "should work" do
     visit_test_server
     page.should have_content('Chessmonger')
-    find('.devise-links .register').click
+    find('.navbar a.register').click
     within '#register' do
       fill_in 'user_email', :with => 'test@alphahydrae.com'
       fill_in 'user_password', :with => '123456'
       fill_in 'user_password_confirmation', :with => '123456'
       find('.btn-primary').click
     end
-    click_link 'logout'
+    find('.navbar a.logout').click
+    find('.navbar a.login').click
     within '#login' do
       fill_in 'user_email', :with => 'test@alphahydrae.com'
       fill_in 'user_password', :with => '123456'
       find('.btn-primary').click
     end
-    page.should have_content('Logout')
-  end
-
-  it "should also work" do
-    visit_test_server
-    page.should have_content('Chessmonger')
-    find('.devise-links .register').click
-    within '#register' do
-      fill_in 'user_email', :with => 'test@alphahydrae.com'
-      fill_in 'user_password', :with => '123456'
-      fill_in 'user_password_confirmation', :with => '123456'
-      find('.btn-primary').click
-    end
-    page.should have_content('Logout')
+    page.should have_selector('a.logout')
   end
 end
