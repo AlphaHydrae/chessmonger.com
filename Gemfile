@@ -33,6 +33,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'paint' # colored output by specs
+  gem 'factory_girl'
 end
 
 group :development, :production do
