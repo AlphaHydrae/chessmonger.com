@@ -86,6 +86,8 @@ GEM
     factory_girl (4.1.0)
       activesupport (>= 3.0.0)
     ffi (1.1.5)
+    foreigner (1.2.1)
+      activerecord (>= 3.0.0)
     haml (3.1.7)
     haml_coffee_assets (1.4.9)
       coffee-script (>= 1.0.0)
@@ -215,6 +217,7 @@ DEPENDENCIES
   devise
   execjs
   factory_girl
+  foreigner
   haml
   haml_coffee_assets
   i18n-js

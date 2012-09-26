@@ -17,6 +17,9 @@ gem 'devise'
 gem 'cancan'
 gem 'role_model'
 
+# Database Foreign Keys
+gem 'foreigner'
+
 group :development do
   gem 'quiet_assets'
   gem 'thin'
