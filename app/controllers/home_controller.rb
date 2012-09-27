@@ -1,6 +1,10 @@
 
 class HomeController < ApplicationController
 
+  def index
+    @latest_games = Game.order('created_at DESC').limit(5).all
+  end
+
   def board
     p1 = Chessmonger::Player.new 'John Doe'
     p2 = Chessmonger::Player.new 'Jane Doe'

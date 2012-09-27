@@ -3,11 +3,19 @@ class Ability
 
   def initialize(user)
 
-    if user.has_role? :admin
+    # admins
+    if user and user.has_role?(:admin)
       can :manage, :all
     end
 
-    can :read, :all
+    # registered users
+    if user
+      can :create, Game, :creator_id => user.id
+      can :read, Game
+    end
+
+    # guests
+    can :read, :home
 
     # Define abilities for the passed in user here. For example:
     #

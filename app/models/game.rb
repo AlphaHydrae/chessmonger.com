@@ -7,6 +7,10 @@ class Game < ActiveRecord::Base
 
   attr_accessible :variant
 
+  def to_param
+    self.key
+  end
+
   private
 
   KEY_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789'

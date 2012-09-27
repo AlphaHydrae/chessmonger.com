@@ -5,3 +5,5 @@ en:
         email: "E-mail"
         password: "Password"
         password_confirmation: "Re-type your password"
+      game:
+        variant: "Variant"

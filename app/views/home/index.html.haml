@@ -1,2 +1,17 @@
 %p Hello World!
-%canvas#board{ :width => 400, :height => 400 }
+%h2 Latest Games
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= Game.human_attribute_name(:key)
+      %th= Game.human_attribute_name(:created_at)
+  %tbody
+    - if @latest_games.any?
+      - @latest_games.each do |g|
+        %tr
+          %td= link_to g.key, game_path(g)
+          %td= l g.created_at, :format => :short
+    - else
+      %tr.empty
+        %td{ :colspan => 2 } No games found.
+= link_to 'Start a new game', new_game_path, :class => 'btn btn-primary game-new'
