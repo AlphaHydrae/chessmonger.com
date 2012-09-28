@@ -7,6 +7,10 @@ class Game < ActiveRecord::Base
 
   attr_accessible :variant
 
+  def variant_object
+    Variant.get variant
+  end
+
   def to_param
     self.key
   end

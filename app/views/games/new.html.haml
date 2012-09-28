@@ -3,6 +3,6 @@
   .control-group
     = f.label :variant, Game.human_attribute_name(:variant), :class => :'control-label'
     .controls
-      = f.select :variant, @variants.collect{ |v| [ human_game_variant(v), v ] }
+      = f.collection_select :variant, @variants, :name, :human_name
   .form-actions
     = f.submit t('.submit'), :class => 'btn btn-primary game-create'

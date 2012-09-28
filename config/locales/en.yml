@@ -7,9 +7,6 @@ en:
     login: "Log in"
     logout: "Log out"
     register: "Register"
-  rulebook:
-    variants:
-      InternationalChess: "International Chess"
   games:
     new:
       title: "New Game"

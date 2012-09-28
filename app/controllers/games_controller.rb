@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   load_and_authorize_resource :find_by => :key
 
   def new
-    @variants = Chessmonger.rulebook.config.variant_names
+    @variants = Variant.all
   end
 
   def create
