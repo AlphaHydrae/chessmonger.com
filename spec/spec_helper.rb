@@ -25,6 +25,38 @@ module TestServerHelper
   end
 end
 
+module Matchers
+  class BeTranslated
+    
+    def initialize locale = nil
+      @locale = locale
+    end
+
+    def matches? actual
+      @actual = actual
+      I18n.t(@actual, :default => 'FUBAR68435197651687') != 'FUBAR68435197651687'
+    end
+
+    def failure_message
+      "expected to find translation for #{@actual}".tap do |msg|
+        msg << " in #{@locale}" if @locale
+      end
+    end
+
+    def negative_failure_message
+      "expected not to find translation for #{@actual}".tap do |msg|
+        msg << " in #{@locale}" if @locale
+      end
+    end
+  end
+
+  def be_translated locale = nil
+    BeTranslated.new locale
+  end
+
+  alias :be_translated_in :be_translated
+end
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -37,6 +69,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   #config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryGirl::Syntax::Methods
+  config.include Matchers
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
