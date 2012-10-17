@@ -1,2 +1,14 @@
+
 I18n.defaultLocale = "<%= I18n.default_locale %>";
 I18n.locale = "<%= I18n.locale %>";
+
+Backbone.Marionette.Renderer.render = function(template, data){
+  if (template === false) {
+    return;
+  } else if (typeof(template) == 'function') {
+    return template(data);
+  } else if (!JST[template]) {
+    throw new Error('Unknown JST template ' + template);
+  }
+  return JST[template](data);
+};
