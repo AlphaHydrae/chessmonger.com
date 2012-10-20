@@ -1,1 +1,1 @@
-%p Hello World!
+%canvas.board{ :width => 480, :height => 480 }
