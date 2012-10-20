@@ -3,7 +3,11 @@ Chessmonger::Application.routes.draw do
   devise_for :users, :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
   match 'board' => 'home#board', :via => :get
-  resources :games, :only => [ :new, :create, :show ]
+  resources :games, :only => [ :new, :create, :show ] do
+    member do
+      get 'room'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

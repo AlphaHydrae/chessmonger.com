@@ -6,6 +6,13 @@ class GamesController < ApplicationController
   end
 
   def create
+
+    @game.participations << Participation.new.tap do |p|
+      p.game = @game
+      p.player = current_user
+      p.number = 1
+    end
+
     if @game.save
       redirect_to game_path(@game)
     else

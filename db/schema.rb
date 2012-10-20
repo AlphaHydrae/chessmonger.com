@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926192753) do
+ActiveRecord::Schema.define(:version => 20121020143216) do
 
   create_table "games", :force => true do |t|
     t.string   "key",        :limit => 5,  :null => false
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(:version => 20120926192753) do
   end
 
   add_index "games", ["key"], :name => "index_games_on_key", :unique => true
+
+  create_table "participations", :force => true do |t|
+    t.integer  "number",     :null => false
+    t.integer  "game_id",    :null => false
+    t.integer  "player_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "participations", ["game_id", "number"], :name => "index_participations_on_game_id_and_number", :unique => true
+  add_index "participations", ["game_id", "player_id"], :name => "index_participations_on_game_id_and_player_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :null => false
@@ -46,5 +57,8 @@ ActiveRecord::Schema.define(:version => 20120926192753) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   add_foreign_key "games", "users", :name => "games_creator_id_fk", :column => "creator_id"
+
+  add_foreign_key "participations", "games", :name => "participations_game_id_fk"
+  add_foreign_key "participations", "users", :name => "participations_player_id_fk", :column => "player_id"
 
 end

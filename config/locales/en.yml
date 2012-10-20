@@ -11,6 +11,8 @@ en:
     new:
       title: "New Game"
       submit: "Create"
+    room:
+      title: "Game Room"
   devise:
     sessions:
       new:

@@ -12,6 +12,7 @@ class Ability
     if user
       can :create, Game, :creator_id => user.id
       can :read, Game
+      can :room, Game
     end
 
     # guests

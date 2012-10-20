@@ -1,6 +1,11 @@
 class Game < ActiveRecord::Base
+
   before_create :set_key
+
   belongs_to :creator, :class_name => 'User'
+  has_many :participations
+
+  default_scope includes(:participations)
 
   validates :creator, :presence => true
   validates :variant, :presence => true, :game_variant => true, :length => { :maximum => 50 }
