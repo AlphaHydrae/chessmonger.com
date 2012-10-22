@@ -2,59 +2,37 @@
 var Game = Backbone.Model.extend({
 
   urlRoot : '/games',
-  idAttribute : 'key'
+  idAttribute : 'key',
+
+  initialize : function() {
+    this.set('boardModel', new Board(this.get('board')), { silent : true });
+    this.set('participationsCollection', new Participations(), { silent : true });
+    this.get('participationsCollection').reset(this.get('participations'));
+    this.bind('change:board', this.updateBoard, this);
+  },
+
+  updateBoard : function() {
+    this.get('boardModel').set({ pieces : this.get('board') });
+  }
 });
 
-var GameView = Backbone.Marionette.ItemView.extend({
+var GameView = Backbone.Marionette.Layout.extend({
 
   template : 'game',
-  ui : {
-    board : '.board'
+  regions : {
+    board : '.board',
+    participations : '.participations'
   },
 
   initialize : function(options) {
-    this.model = new Game({ key : options.config.key });
-    this.model.bind('change', this.update, this);
+    this.model = new Game(options.config);
+    this.boardView = new BoardView({ model : this.model.get('boardModel') });
+    this.participationsView = new ParticipationsList({ collection : this.model.get('participationsCollection') });
   },
 
   onRender : function() {
-    this.drawBoard();
-    this.model.fetch({ dataType : 'json' });
-  },
-
-  update : function() {
-    console.log('update!');
-    this.drawPieces();
-  },
-
-  drawPieces : function() {
-    _.each(this.model.get('board'), _.bind(this.drawPiece, this));
-  },
-
-  drawPiece : function(data) {
-    var pos = data.x + ',' + data.y;
-    var posLayer = this.ui.board.getLayer(pos);
-    var color = data.player == 0 ? 'white' : 'black';
-    this.ui.board.drawImage({
-      source : '/assets/pieces/' + color + '/' + pieceMap[data.piece] + '.png',
-      x : posLayer.x + 5, y : posLayer.y + 5,
-      width : posLayer.width - 10, height : posLayer.height - 10,
-      fromCenter : false
-    });
-  },
-
-  drawBoard : function() {
-    for (var x = 1; x <= 8; x++) {
-      for (var y = 1; y <= 8; y++) {
-        this.ui.board.drawRect({
-          layer : true, name : x + ',' + y, group: 'board',
-          fillStyle : ((x + y) % 2 == 1) ? '#000' : '#fff',
-          x : (x - 1) * 60, y : (8 - y) * 60,
-          width : 60, height : 60,
-          fromCenter : false
-        });
-      }
-    }
+    this.board.show(this.boardView);
+    this.participations.show(this.participationsView);
   }
 });
 

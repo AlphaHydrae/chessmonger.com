@@ -1,9 +1,10 @@
 class Game < ActiveRecord::Base
 
   before_create :set_key
+  after_save :clear_cache
 
   belongs_to :creator, :class_name => 'User'
-  has_many :participations
+  has_many :participations, :order => 'number'
 
   default_scope includes(:participations)
 
@@ -11,6 +12,55 @@ class Game < ActiveRecord::Base
   validates :variant, :presence => true, :game_variant => true, :length => { :maximum => 50 }
 
   attr_accessible :variant
+
+  def serializable_hash options = nil
+    Hash.new.tap do |h|
+
+      h[:id] = id
+      h[:key] = key
+      h[:number_of_players] = implementation.rules.number_of_players
+      h[:participations] = participations.collect{ |p| p.serializable_hash(options) }
+
+      h[:actions] = implementation.rules.current_actions(implementation).collect do |action|
+        {
+          player: implementation.players.index(action.player),
+          origin: {
+            x:  action.origin.x,
+            y:  action.origin.y
+          },
+          target: {
+            x: action.target.x,
+            y: action.target.y
+          }
+        }
+      end
+
+      h[:board] = {
+        width: implementation.rules.board_width,
+        height: implementation.rules.board_height,
+        pieces: []
+      }
+      armory = Chessmonger.rulebook.config.variant('InternationalChess').armory
+      implementation.board.each do |piece,pos|
+        h[:board][:pieces] << {
+          piece: armory.identify(piece.behavior),
+          player: implementation.players.index(piece.player),
+          x: pos.x,
+          y: pos.y
+        }
+      end
+    end
+  end
+
+  def implementation
+    return @impl if @impl
+    p1 = Chessmonger::Player.new 'John Doe'
+    p2 = Chessmonger::Player.new 'Jane Doe'
+    rules = Chessmonger::Variants::InternationalChess.new
+    game = Chessmonger::Game.new rules, [ p1, p2 ]
+    rules.setup game
+    @impl = game
+  end
 
   def variant_object
     Variant.get variant
@@ -27,6 +77,10 @@ class Game < ActiveRecord::Base
 
   def set_key
     self.key = self.class.unique_key
+  end
+
+  def clear_cache
+    @impl = nil
   end
 
   def self.random_key

@@ -8,6 +8,7 @@ Chessmonger::Application.routes.draw do
       get 'room'
     end
   end
+  resources :participations, :only => [ :update ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
