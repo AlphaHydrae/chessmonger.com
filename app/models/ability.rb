@@ -11,13 +11,12 @@ class Ability
     # registered users
     if user
       can :create, Game, :creator_id => user.id
-      can :read, Game
-      can :room, Game
       can :update, Participation
     end
 
     # guests
     can :read, :home
+    can :read, Game
 
     # Define abilities for the passed in user here. For example:
     #

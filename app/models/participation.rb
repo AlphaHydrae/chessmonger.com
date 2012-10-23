@@ -5,7 +5,7 @@ class Participation < ActiveRecord::Base
 
   validates :game, :presence => true
   validates :player_id, :uniqueness => { :scope => :game_id }
-  validates :player_id, :immutable => true, :if => :player
+  validates :player_id, :immutable => true, :on => :update
   validates :number, :presence => true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1 }
 
   attr_accessible :player_id

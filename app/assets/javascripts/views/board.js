@@ -1,6 +1,8 @@
 
-var Board = Backbone.Model.extend({
-});
+var pieceMap = {
+  'ChessPawn' : 'pawn',
+  'ChessKing' : 'king'
+};
 
 var BoardView = Backbone.Marionette.ItemView.extend({
 
@@ -41,7 +43,7 @@ var BoardView = Backbone.Marionette.ItemView.extend({
       for (var y = 1; y <= 8; y++) {
         this.ui.canvas.drawRect({
           layer : true, name : x + ',' + y, group: 'board',
-          fillStyle : ((x + y) % 2 == 1) ? '#000' : '#fff',
+          fillStyle : ((x + y) % 2 == 0) ? '#B89655' : '#FFD175',
           x : (x - 1) * 60, y : (8 - y) * 60,
           width : 60, height : 60,
           fromCenter : false

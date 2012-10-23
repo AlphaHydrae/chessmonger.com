@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/AlphaHydrae/chessmonger.git
-  revision: 472778aa960f484ad0d124ae5b16cb84711ba91f
+  revision: f2e0e99627c25c6ce0689b8bd6d3a180f0516288
   branch: develop
   specs:
     chessmonger (0.0.3)
@@ -40,13 +40,13 @@ GEM
       railties (>= 3.0)
       sass (>= 3.2)
     arel (3.0.2)
-    backbone-on-rails (0.9.2.1)
-      eco (~> 1.0.0)
-      ejs (~> 1.0.0)
+    backbone-on-rails (0.9.2.2)
+      eco
+      ejs
       jquery-rails
-      railties (>= 3.1)
+      rails (>= 3.1)
     bcrypt-ruby (3.0.1)
-    builder (3.0.3)
+    builder (3.0.4)
     cancan (1.6.8)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -55,7 +55,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    childprocess (0.3.5)
+    childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     clah-rails (0.1.0)
     coffee-script (2.2.0)
@@ -63,7 +63,7 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     daemons (1.1.9)
-    database_cleaner (0.8.0)
+    database_cleaner (0.9.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -75,7 +75,7 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
-    ejs (1.0.0)
+    ejs (1.1.1)
     erubis (2.7.0)
     eventmachine (1.0.0)
     execjs (1.4.0)
@@ -86,7 +86,7 @@ GEM
     foreigner (1.2.1)
       activerecord (>= 3.0.0)
     haml (3.1.7)
-    haml_coffee_assets (1.4.9)
+    haml_coffee_assets (1.6.0)
       coffee-script (>= 1.0.0)
       sprockets (>= 2.0.3)
       tilt (>= 1.3.3)
@@ -95,10 +95,10 @@ GEM
     i18n-js (2.1.2)
       i18n
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
-    jquery-ui-rails (2.0.0)
+    jquery-ui-rails (2.0.2)
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.5)
@@ -108,7 +108,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    marionette-rails (0.9.11)
+    marionette-rails (0.10.2)
       rails (>= 3.1.0)
     mime-types (1.19)
     multi_json (1.3.6)
@@ -124,7 +124,7 @@ GEM
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.8)
       actionmailer (= 3.2.8)
@@ -152,8 +152,8 @@ GEM
     rspec-core (2.11.1)
     rspec-expectations (2.11.3)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.11.2)
-    rspec-rails (2.11.0)
+    rspec-mocks (2.11.3)
+    rspec-rails (2.11.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -169,11 +169,11 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    shoulda (3.1.1)
-      shoulda-context (~> 1.0)
-      shoulda-matchers (~> 1.2)
-    shoulda-context (1.0.0)
-    shoulda-matchers (1.3.0)
+    shoulda (3.3.2)
+      shoulda-context (~> 1.0.1)
+      shoulda-matchers (~> 1.4.1)
+    shoulda-context (1.0.1)
+    shoulda-matchers (1.4.1)
       activesupport (>= 3.0.0)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -181,13 +181,13 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
     test-unit (2.5.2)
-    thin (1.4.1)
+    thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
-    treetop (1.4.10)
+    treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)

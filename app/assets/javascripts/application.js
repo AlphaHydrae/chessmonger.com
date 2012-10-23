@@ -17,6 +17,7 @@
 //= require twitter/bootstrap
 //= require underscore
 //= require backbone
+//= require ./lib/backbone-relational
 //= require backbone.marionette
 //= require_tree ./lib
 //= require clah
@@ -24,5 +25,8 @@
 //= require_tree ../templates
 //= require i18n
 //= require i18n/translations
-//= require_tree .
-//= require_tree ./modules
+//= require ./init
+//= require_tree ./models
+//= require_tree ./views
+//= require_tree ./pages
+//= require ./routes

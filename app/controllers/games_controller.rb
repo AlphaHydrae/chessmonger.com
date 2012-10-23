@@ -5,6 +5,10 @@ class GamesController < ApplicationController
     @variants = Variant.all
   end
 
+  def show
+    render_page @game
+  end
+
   def create
 
     @game.implementation.rules.number_of_players.times do |i|
@@ -18,7 +22,7 @@ class GamesController < ApplicationController
     if @game.save
       redirect_to game_path(@game)
     else
-      render :json => @game.errors.full_messages, :status => 400
+      render :json => @game.errors, :status => 400
     end
   end
 end

@@ -12,3 +12,17 @@ Backbone.Marionette.Renderer.render = function(template, data){
   }
   return JST[template](data);
 };
+
+var App = new Backbone.Marionette.Application();
+
+App.addInitializer(function() {
+  var data = $('body').data('user');
+  if (data) {
+    App.user = new User(data);
+  }
+});
+
+$(function() {
+  App.start();
+  Backbone.history.start({ pushState : true });
+});
