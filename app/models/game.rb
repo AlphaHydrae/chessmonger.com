@@ -18,6 +18,9 @@ class Game < ActiveRecord::Base
 
       h[:id] = id
       h[:key] = key
+      h[:variant] = variant
+      h[:creator] = creator.serializable_hash(options)
+      h[:createdAt] = I18n.l(created_at, :format => :long)
       h[:number_of_players] = implementation.rules.number_of_players
       h[:participations] = participations.collect{ |p| p.serializable_hash(options) }
 

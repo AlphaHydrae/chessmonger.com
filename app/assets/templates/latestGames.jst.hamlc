@@ -1,0 +1,8 @@
+%h2 Latest Games
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Variant
+      %th Creator
+      %th Created At
+  %tbody
