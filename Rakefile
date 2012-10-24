@@ -17,8 +17,10 @@ namespace :spec do
   desc "Run the code examples in spec/javascripts"
   task :js do |t|
 
+    tmp = ENV['RAILS_ENV']
     ENV['RAILS_ENV'] = 'development'
     Rake::Task['assets:precompile'].invoke
+    ENV['RAILS_ENV'] = tmp
 
     target = 'spec/javascripts/build/'
 
@@ -35,3 +37,6 @@ namespace :spec do
     system "grunt jasmine"
   end
 end
+
+Rake::Task['spec'].enhance [ 'spec:js' ]
+Rake::Task['spec:fast'].enhance [ 'spec:js' ]
