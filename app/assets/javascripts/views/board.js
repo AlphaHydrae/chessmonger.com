@@ -11,10 +11,6 @@ var BoardView = Backbone.Marionette.ItemView.extend({
     canvas : 'canvas'
   },
 
-  initialize : function() {
-    this.model.bind('change:pieces', this.drawPieces, this);
-  },
-
   onRender : function() {
     this.drawPositions();
     this.drawPieces();

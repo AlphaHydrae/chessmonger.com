@@ -7,6 +7,11 @@ var Game = Backbone.RelationalModel.extend({
   relations : [
     {
       type : 'HasOne',
+      relatedModel : 'User',
+      key : 'creator'
+    },
+    {
+      type : 'HasOne',
       relatedModel : 'Board',
       key : 'board'
     },
@@ -15,5 +20,13 @@ var Game = Backbone.RelationalModel.extend({
       relatedModel : 'Participation',
       key : 'participations'
     }
-  ]
+  ],
+
+  humanVariant : function() {
+    return I18n.t('chessmonger.variants.' + this.get('variant'));
+  }
+});
+
+var Games = Backbone.Collection.extend({
+  model : Game
 });

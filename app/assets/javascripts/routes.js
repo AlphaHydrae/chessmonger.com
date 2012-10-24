@@ -16,4 +16,5 @@ var Router = Backbone.Marionette.AppRouter.extend({
 });
 
 App.router = new Router();
+App.router.routePage('', 'homepage', HomePage);
 App.router.routePage('games/:key', 'showGame', GameView);
