@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   load_and_authorize_resource :find_by => :key
 
   def new
-    @variants = Variant.all
+    render_page :variants => Variant.all
   end
 
   def show
@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     end
 
     if @game.save
-      redirect_to game_path(@game)
+      render :json => @game
     else
       render :json => @game.errors, :status => 400
     end

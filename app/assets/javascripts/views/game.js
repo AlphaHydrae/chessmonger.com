@@ -7,8 +7,8 @@ var GameView = Backbone.Marionette.Layout.extend({
     participations : '.participations'
   },
 
-  initialize : function(options) {
-    this.model = new Game(options.contents);
+  initialize : function(contents) {
+    this.model = new Game(contents);
     this.boardView = new BoardView({ model : this.model.get('board') });
     this.participationsView = new ParticipationsList({ collection : this.model.get('participations') });
   },
@@ -35,6 +35,10 @@ var GameRow = Backbone.Marionette.ItemView.extend({
     createdAt : '.createdAt'
   },
 
+  events : {
+    'click a' : 'openGame'
+  },
+
   onRender : function() {
     this.renderVariant();
     this.ui.creator.text(this.model.get('creator').get('name'));
@@ -43,6 +47,11 @@ var GameRow = Backbone.Marionette.ItemView.extend({
 
   renderVariant : function() {
     this.ui.variant.html($('<a />').attr('href', this.model.url()).text(this.model.humanVariant()));
+  },
+
+  openGame : function() {
+    App.router.navigate(this.model.url().replace(/^\//, ''), { trigger : true });
+    return false;
   }
 });
 

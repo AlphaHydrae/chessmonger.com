@@ -4,17 +4,32 @@ var Router = Backbone.Marionette.AppRouter.extend({
   routes : {},
 
   routePage : function(url, name, pageClass) {
-    this.route(url, name, function() {
-      var page = $('#page');
-      new Backbone.Marionette.Region({
-        el : page
-      }).show(new pageClass({
-        contents : page.data('contents')
-      })); 
+    var self = this;
+    this.route(url, name, function(actualUrl) {
+      self.pageRegion().show(new pageClass()); 
+      if (self.loaded) {
+        $.ajax({
+          url : '/' + Backbone.history.fragment + '.json'
+        }).done(function(response) {
+          App.vent.trigger('page:contents', response);
+        });
+      } else {
+        self.loaded = true;
+        App.vent.trigger('page:contents', self.pageRegion().$el.data('contents'));
+      }
     });
+  },
+
+  pageRegion : function() {
+    if (!this.region) {
+      this.region = new Backbone.Marionette.Region({
+        el : $('#page')
+      });
+    }
+    return this.region;
   }
 });
 
 App.router = new Router();
 App.router.routePage('', 'homepage', HomePage);
-App.router.routePage('games/:key', 'showGame', GameView);
+App.router.routePage('games/:key', 'showGame', ShowGamePage);

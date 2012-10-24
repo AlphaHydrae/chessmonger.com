@@ -23,6 +23,9 @@ namespace :spec do
     ENV['RAILS_ENV'] = tmp
 
     target = 'spec/javascripts/build/'
+    unless system "mkdir #{target}"
+      raise "Couldn't create target directory"
+    end
 
     unless system "cp public/assets/application.js #{target}"
       raise "Couldn't copy development assets to specs"

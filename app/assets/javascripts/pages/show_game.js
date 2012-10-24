@@ -7,6 +7,11 @@ var ShowGamePage = Backbone.Marionette.Layout.extend({
     body : '#gamePage'
   },
 
-  onRender : function() {
+  initialize : function() {
+    this.bindTo(App.vent, 'page:contents', this.renderGame);
+  },
+
+  renderGame : function(contents) {
+    this.body.show(new GameView(contents));
   }
 });
