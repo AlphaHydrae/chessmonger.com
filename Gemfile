@@ -23,6 +23,8 @@ gem 'foreigner'
 group :development do
   gem 'quiet_assets'
   gem 'thin'
+  gem 'rake-version'
+  gem 'paint'
 end
 
 group :test, :development do

@@ -1,0 +1,29 @@
+{
+  "name": "chessmonger.com",
+  "description": "Website for Chessmonger.",
+  "private": true,
+  "version": "0.0.1",
+  "homepage": "https://github.com/AlphaHydrae/chessmonger.com",
+  "author": "Simon Oulevay (Alpha Hydrae)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlphaHydrae/chessmonger.com"
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "scripts": {
+    "test": "grunt jasmine",
+    "start": "grunt jasmine-server"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.16",
+    "grunt-jasmine-runner": "latest"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/AlphaHydrae/chessmonger.com/master/LICENSE.txt"
+    }
+  ]
+}

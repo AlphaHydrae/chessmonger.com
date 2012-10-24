@@ -16,3 +16,9 @@
 
 *.swp
 .DS_Store
+
+node_modules
+
+# Specs
+_SpecRunner.html
+spec/javascripts/build
