@@ -11,6 +11,10 @@ var BoardView = Backbone.Marionette.ItemView.extend({
     canvas : 'canvas'
   },
 
+  initialize : function() {
+    this.bindTo(this.model, 'change:pieces', this.drawPieces);
+  },
+
   onRender : function() {
     this.drawPositions();
     this.drawPieces();
@@ -38,7 +42,7 @@ var BoardView = Backbone.Marionette.ItemView.extend({
     for (var x = 1; x <= 8; x++) {
       for (var y = 1; y <= 8; y++) {
         this.ui.canvas.drawRect({
-          layer : true, name : x + ',' + y, group: 'board',
+          layer : true, name : x + ',' + y, group: 'positions',
           fillStyle : ((x + y) % 2 == 0) ? '#B89655' : '#FFD175',
           x : (x - 1) * 60, y : (8 - y) * 60,
           width : 60, height : 60,

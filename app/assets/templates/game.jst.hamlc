@@ -2,11 +2,4 @@
   .span6
     .board
   .span6
-    %dl.dl-horizontal
-      %dt Variant
-      %dd International Chess
-      %dt Time
-      %dd 4 hours 3 minutes
-      %dt Created by
-      %dd Alpha Hydrae
-    .participations
+    .panel

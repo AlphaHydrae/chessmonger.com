@@ -2,7 +2,16 @@ class GamesController < ApplicationController
   load_and_authorize_resource :find_by => :key
 
   def new
-    render_page :variants => Variant.all
+    render_page :variants => Variant.all.collect{ |v|
+      game = Game.new
+      game.creator = current_user
+      game.created_at = Time.now
+      {
+        :name => v.name,
+        :human_name => v.human_name,
+        :board => game.serializable_hash[:board]
+      }
+    }
   end
 
   def show

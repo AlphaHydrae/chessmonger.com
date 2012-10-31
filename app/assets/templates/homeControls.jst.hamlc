@@ -1,0 +1,1 @@
+%button.new_game.btn.btn-primary{ :type => 'button' } Create a new game

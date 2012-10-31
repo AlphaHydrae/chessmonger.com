@@ -1,10 +1,11 @@
 
 var ShowGamePage = Backbone.Marionette.Layout.extend({
 
-  template : _.template('<div id="gamePage" />'),
+  template : 'game',
 
   regions : {
-    body : '#gamePage'
+    board : '.board',
+    panel : '.panel'
   },
 
   initialize : function() {
@@ -12,6 +13,8 @@ var ShowGamePage = Backbone.Marionette.Layout.extend({
   },
 
   renderGame : function(contents) {
-    this.body.show(new GameView(contents));
+    this.gameModel = new Game(contents);
+    this.board.show(new BoardView({ model : this.gameModel.get('board') }));
+    this.panel.show(new GameInfoView({ model : this.gameModel }));
   }
 });

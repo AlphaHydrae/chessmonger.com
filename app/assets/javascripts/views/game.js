@@ -1,21 +1,13 @@
 
-var GameView = Backbone.Marionette.Layout.extend({
+var GameInfoView = Backbone.Marionette.Layout.extend({
 
-  template : 'game',
+  template : 'gameInfo',
   regions : {
-    board : '.board',
     participations : '.participations'
   },
 
-  initialize : function(contents) {
-    this.model = new Game(contents);
-    this.boardView = new BoardView({ model : this.model.get('board') });
-    this.participationsView = new ParticipationsList({ collection : this.model.get('participations') });
-  },
-
   onRender : function() {
-    this.board.show(this.boardView);
-    this.participations.show(this.participationsView);
+    this.participations.show(new ParticipationsList({ collection : this.model.get('participations') }));
   }
 });
 
