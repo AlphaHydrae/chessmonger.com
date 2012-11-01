@@ -22,6 +22,10 @@ var Game = Backbone.RelationalModel.extend({
     }
   ],
 
+  toJSON : function() {
+    return _.pick(this.attributes, 'variant');
+  },
+
   humanVariant : function() {
     return I18n.t('chessmonger.variants.' + this.get('variant'));
   }

@@ -3,3 +3,4 @@
   %fieldset
     %label{ :for => 'game_variant' } Variant
     %select#game_variant
+  %button.btn.btn-primary{ :type => 'button' } Submit
