@@ -6,10 +6,13 @@ var Router = Backbone.Marionette.AppRouter.extend({
   routePage : function(url, name, pageClass) {
     var self = this;
     this.route(url, name, function(actualUrl) {
-      self.pageRegion().show(new pageClass()); 
+      App.vent.trigger('page:changing');
+      self.pageRegion().show(new pageClass(self.initialPageData)); 
+      self.initialPageData = undefined;
+      App.vent.trigger('page:loading');
       if (self.loaded) {
         $.ajax({
-          url : '/' + Backbone.history.fragment + '.json'
+          url : '/' + (Backbone.history.fragment || 'home') + '.json'
         }).done(function(response) {
           App.vent.trigger('page:contents', response);
         });

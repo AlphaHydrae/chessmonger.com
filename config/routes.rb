@@ -2,13 +2,15 @@ Chessmonger::Application.routes.draw do
 
   devise_for :users, :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
-  match 'board' => 'home#board', :via => :get
   resources :games, :only => [ :new, :create, :show ] do
-    member do
-      get 'room'
+    collection do
+      get 'latest'
     end
   end
   resources :participations, :only => [ :update ]
+
+  match 'home' => 'home#index', :via => :get
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -60,7 +62,6 @@ Chessmonger::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

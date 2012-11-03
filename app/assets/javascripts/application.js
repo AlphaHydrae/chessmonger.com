@@ -26,6 +26,7 @@
 //= require i18n
 //= require i18n/translations
 //= require ./init
+//= require_tree ./utils
 //= require_tree ./models
 //= require_tree ./views
 //= require_tree ./pages

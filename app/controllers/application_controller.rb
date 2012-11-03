@@ -4,11 +4,14 @@ class ApplicationController < ActionController::Base
   private
 
   def render_page contents
-    if request.xhr?
-      render :json => contents
-    else
-      @page_contents = contents
-      render '/page'
+    respond_to do |format|
+      format.json do
+        render :json => contents
+      end
+      format.html do
+        @page_contents = contents
+        render '/page'
+      end
     end
   end
 end

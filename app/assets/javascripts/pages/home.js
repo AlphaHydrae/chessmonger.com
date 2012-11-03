@@ -7,8 +7,12 @@ var HomeControls = Backbone.Marionette.ItemView.extend({
     'click .new_game' : 'newGame'
   },
 
+  initialize : function(options) {
+    this.game = new Game(options.game);
+  },
+
   newGame : function() {
-    App.router.navigate('games/new', { trigger : true });
+    App.goToPage('games/new', { game : this.game }, { keep : this.game });
   }
 });
 
@@ -17,28 +21,23 @@ var HomePage = Backbone.Marionette.Layout.extend({
   template : 'home',
   regions : {
     latestGames : '.latest',
-    controls : '.controls'
+    controls : {
+      selector : '.controls',
+      regionType : FadeRegion
+    }
   },
 
   initialize : function() {
-    this.collection = new Games();
     this.bindTo(App.vent, 'page:contents', this.setContents);
   },
 
-  onClose : function() {
-    this.collection.forEach(function(model) {
-      Backbone.Relational.store.unregister(model);
-    });
-  },
-
   setContents : function(contents) {
-    this.collection.reset(contents);
+    this.controls.show(new HomeControls({ game : contents.new_game }));
   },
 
   onRender : function() {
-    this.latestGames.show(new LatestGames({
-      collection : this.collection
+    this.latestGames.show(new LatestGamesView({
+      collection : new LatestGames()
     }));
-    this.controls.show(new HomeControls());
   }
 });

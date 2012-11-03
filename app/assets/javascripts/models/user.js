@@ -1,2 +1,2 @@
 
-var User = Backbone.RelationalModel.extend({});
+var User = AppModel.extend({});

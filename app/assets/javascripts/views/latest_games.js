@@ -1,16 +1,4 @@
 
-var GameInfoView = Backbone.Marionette.Layout.extend({
-
-  template : 'gameInfo',
-  regions : {
-    participations : '.participations'
-  },
-
-  onRender : function() {
-    this.participations.show(new ParticipationsList({ collection : this.model.get('participations') }));
-  }
-});
-
 var NoGameRow = Backbone.Marionette.ItemView.extend({
   tagName : 'tr',
   className : 'empty',
@@ -34,7 +22,7 @@ var GameRow = Backbone.Marionette.ItemView.extend({
   onRender : function() {
     this.renderVariant();
     this.ui.creator.text(this.model.get('creator').get('name'));
-    this.ui.createdAt.text(this.model.get('createdAt'));
+    this.ui.createdAt.text(this.model.get('created_at'));
   },
 
   renderVariant : function() {
@@ -42,14 +30,27 @@ var GameRow = Backbone.Marionette.ItemView.extend({
   },
 
   openGame : function() {
-    App.router.navigate(this.model.url().replace(/^\//, ''), { trigger : true });
+    App.goToPage(this.model.url(), { game : this.model }, { keep : this.model });
     return false;
   }
 });
 
-var LatestGames = Backbone.Marionette.CompositeView.extend({
+var LatestGames = Games.extend({
+  url : '/games/latest'
+});
+
+var LatestGamesView = Backbone.Marionette.CompositeView.extend({
+
   template : 'latestGames',
   itemView : GameRow,
   itemViewContainer : 'tbody',
-  emptyView : NoGameRow
+  emptyView : NoGameRow,
+
+  initialize : function() {
+    this.bindTo(this, 'composite:rendered', this.fetchGames);
+  },
+
+  fetchGames : function() {
+    this.collection.fetch();
+  }
 });

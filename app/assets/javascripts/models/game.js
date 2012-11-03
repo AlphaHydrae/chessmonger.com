@@ -1,5 +1,5 @@
 
-var Game = Backbone.RelationalModel.extend({
+var Game = AppModel.extend({
 
   urlRoot : '/games',
   idAttribute : 'key',
@@ -18,6 +18,7 @@ var Game = Backbone.RelationalModel.extend({
     {
       type : 'HasMany',
       relatedModel : 'Participation',
+      collectionType : 'Participations',
       key : 'participations'
     }
   ],
@@ -28,9 +29,13 @@ var Game = Backbone.RelationalModel.extend({
 
   humanVariant : function() {
     return I18n.t('chessmonger.variants.' + this.get('variant'));
+  },
+
+  allModels : function() {
+    return _.compact([ this, this.get('creator'), this.get('board') ].concat(this.has('participations') ? this.get('participations').allModels() : []));
   }
 });
 
-var Games = Backbone.Collection.extend({
+var Games = AppCollection.extend({
   model : Game
 });

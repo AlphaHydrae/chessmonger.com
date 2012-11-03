@@ -16,26 +16,32 @@ class Game < ActiveRecord::Base
   def serializable_hash options = nil
     Hash.new.tap do |h|
 
-      h[:id] = id
-      h[:key] = key
-      h[:variant] = variant
-      h[:creator] = creator.serializable_hash(options)
-      h[:createdAt] = I18n.l(created_at, :format => :long)
-      h[:number_of_players] = implementation.rules.number_of_players
-      h[:participations] = participations.collect{ |p| p.serializable_hash(options) }
+      unless new_record?
+        h[:id] = id
+        h[:key] = key
+      end
 
-      h[:actions] = implementation.rules.current_actions(implementation).collect do |action|
-        {
-          player: implementation.players.index(action.player),
-          origin: {
-            x:  action.origin.x,
-            y:  action.origin.y
-          },
-          target: {
-            x: action.target.x,
-            y: action.target.y
+      h[:variant] = variant
+      h[:human_variant] = Variant.get(variant).human_name
+      h[:creator] = creator.serializable_hash(options) if creator
+      h[:created_at] = I18n.l(created_at, :format => :long) if created_at
+      h[:number_of_players] = implementation.rules.number_of_players
+
+      unless new_record?
+        h[:actions] = implementation.rules.current_actions(implementation).collect do |action|
+          {
+            player: implementation.players.index(action.player),
+            origin: {
+              x:  action.origin.x,
+              y:  action.origin.y
+            },
+            target: {
+              x: action.target.x,
+              y: action.target.y
+            }
           }
-        }
+        end
+        h[:participations] = participations.collect{ |p| p.serializable_hash(options) }
       end
 
       h[:board] = {

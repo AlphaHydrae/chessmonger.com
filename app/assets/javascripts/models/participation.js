@@ -1,5 +1,5 @@
 
-var Participation = Backbone.RelationalModel.extend({
+var Participation = AppModel.extend({
   urlRoot : '/participations',
   relations : [
     {
@@ -9,9 +9,13 @@ var Participation = Backbone.RelationalModel.extend({
       keyDestination : 'player_id',
       includeInJSON : 'id'
     }
-  ]
+  ],
+
+  allModels : function() {
+    return _.compact([ this, this.get('user') ]);
+  }
 });
 
-var Participations = Backbone.Collection.extend({
+var Participations = AppCollection.extend({
   model : Participation
 });

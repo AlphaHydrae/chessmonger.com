@@ -15,6 +15,14 @@ Backbone.Marionette.Renderer.render = function(template, data){
 
 var App = new Backbone.Marionette.Application();
 
+<% if Rails.env == 'production' %>
+  App.log = function() {};
+<% else %>
+  App.log = function(msg) {
+    console.log(msg);
+  };
+<% end %>
+
 App.version = "<%= Chessmonger::Application::VERSION %>";
 
 App.addInitializer(function() {
@@ -22,6 +30,47 @@ App.addInitializer(function() {
   if (data) {
     App.user = new User(data);
   }
+});
+
+App.goToPage = function(route, data, options) {
+
+  App.router.initialPageData = data;
+
+  if (options.keep) {
+    App.keep(options.keep);
+  }
+
+  App.router.navigate(route.replace(/^\//, ''), { trigger : true });
+};
+
+App.keepList = [];
+App.keep = function(model) {
+  if (model) {
+    App.keepList = model.allModels();
+  }
+  return App.keepList;
+};
+
+Backbone.Store.prototype.clear = function(models) {
+
+  var models = _.inject(this._collections, function(memo, collection) {
+    return memo.concat(collection.models);
+  }, []);
+
+  var self = this;
+  _.each(models, function(model) {
+    if (!_.contains(App.keepList, model)) {
+      self.unregister(model);
+    }
+  });
+
+  App.keepList = [];
+  
+  App.log('Cleared ' + models.length + ' models from backbone relational store');
+};
+
+App.vent.on('page:changing', function() {
+  Backbone.Relational.store.clear();
 });
 
 $(function() {
