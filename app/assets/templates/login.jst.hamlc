@@ -1,0 +1,23 @@
+.modal-header
+  %button.close{ :type => 'button', :'data-dismiss' => 'modal' } x
+  %h3 Login
+.modal-body
+  %form.form-horizontal{ :action => '/users/login' }
+    .control-group
+      %label.control-label{ :for => 'user_email' }= I18n.t('activerecord.attributes.user.email')
+      .controls
+        %input#user_email{ :type => 'email', :name => 'user[email]' }
+    .control-group
+      %label.control-label{ :for => 'user_password' }= I18n.t('activerecord.attributes.user.password')
+      .controls
+        %input#user_password{ :type => 'password', :name => 'user[password]' }
+    .control-group
+      .controls
+        %label.control-label
+          %input{ :type => 'checkbox' }
+          Remember me
+.modal-footer
+  .pull-left
+    %a.register{ :href => '#' } Create a new account
+  %button.btn{ :type => 'button', :'data-dismiss' => 'modal' } Close
+  %button.login.btn.btn-primary{ :type => 'button' } Login

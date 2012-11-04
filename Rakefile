@@ -23,7 +23,7 @@ namespace :spec do
     ENV['RAILS_ENV'] = tmp
 
     target = 'spec/javascripts/build/'
-    unless system "mkdir #{target}"
+    unless system "mkdir -p #{target}"
       raise "Couldn't create target directory"
     end
 

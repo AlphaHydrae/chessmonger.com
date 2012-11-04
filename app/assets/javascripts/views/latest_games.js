@@ -30,7 +30,7 @@ var GameRow = Backbone.Marionette.ItemView.extend({
   },
 
   openGame : function() {
-    App.goToPage(this.model.url(), { game : this.model }, { keep : this.model });
+    App.goToPage(this.model.url(), { game : this.model });
     return false;
   }
 });

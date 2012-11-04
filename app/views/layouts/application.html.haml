@@ -5,16 +5,10 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application" 
     = csrf_meta_tags
-  %body{ :data => { :user => current_user.try(:to_json) } }
+  %body{ :data => { :user => current_user.try(:to_json), :contents => @page_contents.try(:to_json) } }
     .navbar.navbar-fixed-top.navbar-inverse
       .navbar-inner
         .container
-          %a.brand{ :href => root_path }= t('common.title')
-          %ul.nav.pull-right
-            - if user_signed_in?
-              %li= link_to t('common.logout'), destroy_user_session_path, :method => :delete, :class => :logout
-            - else
-              %li= link_to t('common.login'), new_user_session_path, :class => :login
-              %li= link_to t('common.register'), new_registration_path(User), :class => :register
+          %a.brand{ :href => '#' }= t('common.title')
     .container
       = yield

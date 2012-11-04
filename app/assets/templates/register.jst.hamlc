@@ -1,0 +1,22 @@
+.modal-header
+  %button.close{ :type => 'button', :'data-dismiss' => 'modal' } x
+  %h3 Create a new account
+.modal-body
+  %form.form-horizontal{ :action => '/users' }
+    .control-group
+      %label.control-label{ :for => 'user_email' }= I18n.t('activerecord.attributes.user.email')
+      .controls
+        %input#user_email{ :type => 'email', :name => 'user[email]' }
+    .control-group
+      %label.control-label{ :for => 'user_password' }= I18n.t('activerecord.attributes.user.password')
+      .controls
+        %input#user_password{ :type => 'password', :name => 'user[password]' }
+    .control-group
+      %label.control-label{ :for => 'user_password_confirmation' }= I18n.t('activerecord.attributes.user.password_confirmation')
+      .controls
+        %input#user_password_confirmation{ :type => 'password', :name => 'user[password_confirmation]' }
+.modal-footer
+  .pull-left
+    %a.login{ :href => '#' } Login
+  %button.btn{ :type => 'button', :'data-dismiss' => 'modal' } Close
+  %button.register.btn.btn-primary{ :type => 'button' } Submit

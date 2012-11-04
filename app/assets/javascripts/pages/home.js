@@ -12,7 +12,7 @@ var HomeControls = Backbone.Marionette.ItemView.extend({
   },
 
   newGame : function() {
-    App.goToPage('games/new', { game : this.game }, { keep : this.game });
+    App.goToPage('games/new', { game : this.game });
   }
 });
 

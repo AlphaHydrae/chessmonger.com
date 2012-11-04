@@ -1,0 +1,5 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    #menu.container
+      %a.brand{ :href => '/' }= I18n.t('common.title')
+#page.container

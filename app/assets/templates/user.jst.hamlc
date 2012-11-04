@@ -1,0 +1,9 @@
+%li.login
+  %a{ :href => '#' } Join / Login
+%li.dropdown.logged
+  %a.dropdown-toggle{ :href => '#', :'data-toggle' => 'dropdown' }
+    %span.username Username
+    %b.caret
+  %ul.dropdown-menu
+    %li
+      %a.logout{ :href => '/users/logout' } Logout

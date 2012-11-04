@@ -36,8 +36,14 @@ App.goToPage = function(route, data, options) {
 
   App.router.initialPageData = data;
 
-  if (options.keep) {
+  if (options && options.keep) {
     App.keep(options.keep);
+  } else if (data) {
+    _.each(data, function(value, key) {
+      if (typeof(value.allModels) == 'function') {
+        App.keep(value);
+      }
+    });
   }
 
   App.router.navigate(route.replace(/^\//, ''), { trigger : true });
@@ -46,7 +52,7 @@ App.goToPage = function(route, data, options) {
 App.keepList = [];
 App.keep = function(model) {
   if (model) {
-    App.keepList = model.allModels();
+    App.keepList = App.keepList.concat(model.allModels());
   }
   return App.keepList;
 };
@@ -73,7 +79,43 @@ App.vent.on('page:changing', function() {
   Backbone.Relational.store.clear();
 });
 
+App.modal = function(view) {
+  if (!App.modalView) {
+    App.modalView = new ModalView();
+    App.modalView.render();
+  }
+  App.modalView.region.show(view);
+  App.modalView.$el.modal();
+  App.modalView.$el.on('hidden', function() {
+    App.modalView.close();
+    $(this).remove();
+  });
+};
+
+App.hideModal = function() {
+  App.modalView.$el.modal('hide');
+};
+
+App.addInitializer(function() {
+  this.view = new AppView();
+  this.bodyRegion.show(this.view);
+  Backbone.history.start({ pushState : true });
+});
+
+App.addInitializer(function() {
+  $.ajax({
+    url : '/account'
+  }).done(function(response) {
+    App.vent.trigger('user:login', response);
+  }).fail(function(jqxhr) {
+    App.vent.trigger('user:logout');
+  });
+});
+
+App.addRegions({
+  bodyRegion : 'body'
+});
+
 $(function() {
   App.start();
-  Backbone.history.start({ pushState : true });
 });
